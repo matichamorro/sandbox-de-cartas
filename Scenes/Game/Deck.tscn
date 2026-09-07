@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://b8v7grbmj3wcu"]
+
+[ext_resource type="Script" uid="uid://bo5ucvdxwt3xe" path="res://Scripts/Game/deck.gd" id="1_57cf8"]
+[ext_resource type="PackedScene" uid="uid://y16n4fhykfog" path="res://Scenes/Game/Card.tscn" id="2_0g7pp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jphlo"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_jphlo"]
+size = Vector3(0.63, 1, 0.88)
+
+[sub_resource type="QuadMesh" id="QuadMesh_ac40y"]
+size = Vector2(0.63, 0.88)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jphlo"]
+size = Vector3(0.63, 0.3, 0.88)
+
+[node name="Deck" type="Node3D" groups=["deck_group"]]
+script = ExtResource("1_57cf8")
+card_scene = ExtResource("2_0g7pp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+material_override = SubResource("StandardMaterial3D_jphlo")
+mesh = SubResource("BoxMesh_jphlo")
+
+[node name="TopCardMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.31, 0)
+mesh = SubResource("QuadMesh_ac40y")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." groups=["deck_area"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+shape = SubResource("BoxShape3D_jphlo")
+debug_color = Color(1.347661e-06, 0.42080697, 0.4948737, 0.41960785)
+
+[node name="CountLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+pixel_size = 0.01
+billboard = 1
+no_depth_test = true
+text = "5"
+outline_size = 4
